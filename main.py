@@ -42,7 +42,7 @@ def authenticate():
                 app.config['SECRET_KEY'],
                 algorithm='HS256'
             )
-            return jsonify({'jwt_token': jwt_token})
+            return jsonify({'jwt_token': jwt_token, 'status': 'success'})
         else:
             return jsonify({'status': 'error', 'message': f'Invalid email or password'}), 404
     else:
@@ -70,7 +70,7 @@ def create():
         if validate(url):
             url_short = random_string()
             data[url_short] = url
-            return jsonify({'status': 'success', 'short_version': url_short}), 200
+            return jsonify({'status': 'success', 'short_version': url_short})
         else:
             return jsonify({'status': 'error', 'message': 'URL is not a valid format'}), 400
     else:
