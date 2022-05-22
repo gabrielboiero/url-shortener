@@ -87,7 +87,7 @@ curl --request POST \
   --url http://127.0.0.1:5000/create \
   --header 'Content-Type: multipart/form-data' \
   --header 'jwt_token: eyJ0eXAiOiJKV1QiLCJhbGc....21_DJyJLZhmEMw2OyjZZ26g67V1bzHA' \
-  --form url=https://developers.google.com/web
+  --form url=https://shortcut.io/about/
 ```
 
 Result should be like this:
@@ -103,7 +103,7 @@ Result should be like this:
 
 Open in browser `127.0.0.1:5000/<short_url>`, redirection should be done to original URL and there is no need to pass the `jwt_token`, since anyone should be able to decode a URL
 
-From previous example: Open in browser `127.0.0.1:5000/nonXuN`, this should redirect to `https://developers.google.com/web`
+From previous example: Open in browser `127.0.0.1:5000/nonXuN`, this should redirect to `https://shortcut.io/about/`
 
 ### Running tests
 

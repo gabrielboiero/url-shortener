@@ -72,7 +72,7 @@ def test_authenticate_invalid_user(client):
 
 
 def test_create_short_url(authenticated_user_token, client):
-    response = client.post('/create', data={'url': 'https://www.google.com'},
+    response = client.post('/create', data={'url': 'https://shortcut.io/about/'},
                            headers={'jwt_token': authenticated_user_token})
     assert_that(response.status_code).is_equal_to(200)
     assert_that(response.json).contains_key('short_version')
@@ -80,7 +80,7 @@ def test_create_short_url(authenticated_user_token, client):
 
 def test_expired_token(authenticated_user_token, client):
     time.sleep(6)  # Ensure that token has expired from 5s override in config fixture
-    response = client.post('/create', data={'url': 'https://www.google.com'},
+    response = client.post('/create', data={'url': 'https://shortcut.io/about/'},
                            headers={'jwt_token': authenticated_user_token})
     assert_that(response.status_code).is_equal_to(404)
     assert_that(response.json).contains_entry({'status': 'error'})
@@ -88,7 +88,7 @@ def test_expired_token(authenticated_user_token, client):
 
 
 def test_create_and_redirect(authenticated_user_token, client):
-    response = client.post('/create', data={'url': 'https://www.google.com'},
+    response = client.post('/create', data={'url': 'https://shortcut.io/about/'},
                            headers={'jwt_token': authenticated_user_token})
     assert_that(response.status_code).is_equal_to(200)
     short_url = response.json['short_version']
@@ -97,11 +97,11 @@ def test_create_and_redirect(authenticated_user_token, client):
 
 
 def test_retrieve_url(authenticated_user_token, client):
-    response = client.post('/create', data={'url': 'https://www.google.com'},
+    response = client.post('/create', data={'url': 'https://shortcut.io/about/'},
                            headers={'jwt_token': authenticated_user_token})
     assert_that(response.status_code).is_equal_to(200)
     short_url = response.json['short_version']
     response = client.get(f'/retrieve/{short_url}',
                           headers={'jwt_token': authenticated_user_token})
     assert_that(response.status_code).is_equal_to(201)
-    assert_that(response.json).contains_entry({'url': 'https://www.google.com'})
+    assert_that(response.json).contains_entry({'url': 'https://shortcut.io/about/'})
