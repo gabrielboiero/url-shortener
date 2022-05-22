@@ -107,5 +107,6 @@ From previous example: Open in browser `127.0.0.1:5000/nonXuN`, this should redi
 ### Running tests
 
 ```shell
+source venv/bin/activate  # Only if venv is not active yet
 python3 -m pytest --verbose test_main.py
 ```
