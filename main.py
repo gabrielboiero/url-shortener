@@ -44,7 +44,7 @@ def authenticate():
             )
             return jsonify({'jwt_token': jwt_token, 'status': 'success'})
         else:
-            return jsonify({'status': 'error', 'message': f'Invalid email or password'}), 404
+            return jsonify({'status': 'error', 'message': 'Invalid email or password'}), 404
     else:
         return jsonify({'status': 'error', 'message': 'Missing email or password'}), 400
 
