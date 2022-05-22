@@ -102,6 +102,7 @@ Result should be like this:
 ### Decoding URLs
 
 Open in browser `127.0.0.1:5000/<short_url>`, redirection should be done to original URL and there is no need to pass the `jwt_token`, since anyone should be able to decode a URL
+
 From previous example: Open in browser `127.0.0.1:5000/nonXuN`, this should redirect to `https://developers.google.com/web`
 
 ### Running tests
