@@ -94,3 +94,14 @@ def test_create_and_redirect(authenticated_user_token, client):
     short_url = response.json['short_version']
     response = client.get(f'/{short_url}')
     assert_that(response.status_code).is_equal_to(302)
+
+
+def test_retrieve_url(authenticated_user_token, client):
+    response = client.post('/create', data={'url': 'https://www.google.com'},
+                           headers={'jwt_token': authenticated_user_token})
+    assert_that(response.status_code).is_equal_to(200)
+    short_url = response.json['short_version']
+    response = client.get(f'/retrieve/{short_url}',
+                          headers={'jwt_token': authenticated_user_token})
+    assert_that(response.status_code).is_equal_to(201)
+    assert_that(response.json).contains_entry({'url': 'https://www.google.com'})
